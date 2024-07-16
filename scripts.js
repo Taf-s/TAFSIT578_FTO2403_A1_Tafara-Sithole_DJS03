@@ -58,35 +58,57 @@ function createPreviewElements(
 // Callback function that initialises the preview for each of the books //
 createPreviewElements(books, authors, "[data-list-items]", BOOKS_PER_PAGE);
 
-const genreHtml = document.createDocumentFragment();
-const firstGenreElement = document.createElement("option");
-firstGenreElement.value = "any";
-firstGenreElement.innerText = "All Genres";
-genreHtml.appendChild(firstGenreElement);
+/**
+ * Opens the search overlay and initializes the genres and authors dropdown menus.
+ */
+function openSearchOverlay() {
+  // Code to toggle the search overlay and to activate the search //
+  document
+    .querySelector("[data-header-search]")
+    .addEventListener("click", () => {
+      document.querySelector("[data-search-overlay]").open = true;
+      document.querySelector("[data-search-title]").focus();
+    });
 
-for (const [id, name] of Object.entries(genres)) {
-  const element = document.createElement("option");
-  element.value = id;
-  element.innerText = name;
-  genreHtml.appendChild(element);
+  // Code to populate the genres and authors dropdown menus //
+  const genreHtml = document.createDocumentFragment();
+  const firstGenreElement = document.createElement("option");
+  firstGenreElement.value = "any";
+  firstGenreElement.innerText = "All Genres";
+  genreHtml.appendChild(firstGenreElement);
+
+  for (const [id, name] of Object.entries(genres)) {
+    const element = document.createElement("option");
+    element.value = id;
+    element.innerText = name;
+    genreHtml.appendChild(element);
+  }
+
+  document.querySelector("[data-search-genres]").appendChild(genreHtml);
+
+  const authorsHtml = document.createDocumentFragment();
+  const firstAuthorElement = document.createElement("option");
+  firstAuthorElement.value = "any";
+  firstAuthorElement.innerText = "All Authors";
+  authorsHtml.appendChild(firstAuthorElement);
+
+  for (const [id, name] of Object.entries(authors)) {
+    const element = document.createElement("option");
+    element.value = id;
+    element.innerText = name;
+    authorsHtml.appendChild(element);
+  }
+
+  document.querySelector("[data-search-authors]").appendChild(authorsHtml);
+
+  // Code to handle cancel button to close the overlay//
+  document
+    .querySelector("[data-search-cancel]")
+    .addEventListener("click", () => {
+      document.querySelector("[data-search-overlay]").open = false;
+    });
 }
-
-document.querySelector("[data-search-genres]").appendChild(genreHtml);
-
-const authorsHtml = document.createDocumentFragment();
-const firstAuthorElement = document.createElement("option");
-firstAuthorElement.value = "any";
-firstAuthorElement.innerText = "All Authors";
-authorsHtml.appendChild(firstAuthorElement);
-
-for (const [id, name] of Object.entries(authors)) {
-  const element = document.createElement("option");
-  element.value = id;
-  element.innerText = name;
-  authorsHtml.appendChild(element);
-}
-
-document.querySelector("[data-search-authors]").appendChild(authorsHtml);
+openSearchOverlay();
 
 // const themeSwitch =  (theme) => {
 //     if (
@@ -139,9 +161,9 @@ document.querySelector("[data-list-button]").innerHTML = `
     })</span>
 `;
 
-document.querySelector("[data-search-cancel]").addEventListener("click", () => {
-  document.querySelector("[data-search-overlay]").open = false;
-});
+// document.querySelector("[data-search-cancel]").addEventListener("click", () => {
+//   document.querySelector("[data-search-overlay]").open = false;
+// });
 
 document
   .querySelector("[data-settings-cancel]")
@@ -149,10 +171,10 @@ document
     document.querySelector("[data-settings-overlay]").open = false;
   });
 
-document.querySelector("[data-header-search]").addEventListener("click", () => {
-  document.querySelector("[data-search-overlay]").open = true;
-  document.querySelector("[data-search-title]").focus();
-});
+// document.querySelector("[data-header-search]").addEventListener("click", () => {
+//   document.querySelector("[data-search-overlay]").open = true;
+//   document.querySelector("[data-search-title]").focus();
+// });
 
 document
   .querySelector("[data-header-settings]")
