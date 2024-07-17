@@ -12,12 +12,7 @@ let matches = books;
  * @param {number} booksPerPage - The number of books to display per page.
  * @return {void}
  */
-function createPreviewElements(
-  books,
-  authors,
-  containerSelector,
-  booksPerPage
-) {
+function booksPreview(books, authors, containerSelector, booksPerPage) {
   const container = document.querySelector(containerSelector);
   const starting = document.createDocumentFragment();
 
@@ -27,7 +22,7 @@ function createPreviewElements(
    * @param {Object} book - The book object containing author, id, image, and title.
    * @return {HTMLElement} The created preview element.
    */
-  const createPreviewElement = ({ author, id, image, title }) => {
+  const booksPreview = ({ author, id, image, title }) => {
     const element = document.createElement("button");
     element.classList = "preview";
     element.setAttribute("data-preview", id);
@@ -47,16 +42,14 @@ function createPreviewElements(
     return element;
   };
 
-  const previewElements = books
-    .slice(0, booksPerPage)
-    .map(createPreviewElement);
+  const previewElements = books.slice(0, booksPerPage).map(booksPreview);
 
   previewElements.forEach((element) => starting.appendChild(element));
 
   container.appendChild(starting);
 }
 // Callback function that initialises the preview for each of the books //
-createPreviewElements(books, authors, "[data-list-items]", BOOKS_PER_PAGE);
+booksPreview(books, authors, "[data-list-items]", BOOKS_PER_PAGE);
 
 /**
  * Opens the search overlay and initializes the genres and authors dropdown menus.
@@ -109,82 +102,36 @@ function openSearchOverlay() {
     });
 }
 openSearchOverlay();
+/**
+ * Updates the show more button in the list view.
+ *
+ * @param {Array<Object>} books - The list of books.
+ * @param {number} page - The current page.
+ * @param {Array<Object>} matches - The list of books that match the current search.
+ * @param {number} BOOKS_PER_PAGE - The number of books per page.
+ * @param {HTMLElement} listButton - The show more button element.
+ */
+function showMoreButton(books, page, matches, BOOKS_PER_PAGE, listButton) {
+  listButton.innerText = `Show more (${books.length - BOOKS_PER_PAGE})`;
+  listButton.disabled = matches.length - page * BOOKS_PER_PAGE > 0;
 
-// const themeSwitch =  (theme) => {
-//     if (
-//         window.matchMedia &&
-//         window.matchMedia("(prefers-color-scheme: dark)").matches
-//       ) {
-//         document.querySelector("[data-settings-theme]").value = "night";
-//         document.documentElement.style.setProperty("--color-dark", "255, 255, 255");
-//         document.documentElement.style.setProperty("--color-light", "10, 10, 20");
-//       } else {
-//         document.querySelector("[data-settings-theme]").value = "day";
-//         document.documentElement.style.setProperty("--color-dark", "10, 10, 20");
-//         document.documentElement.style.setProperty("--color-light", "255, 255, 255");
-//       }
-// }
-
-// themeSwitch();
-
-// let currentTheme = "day";
-
-// const themeSwitch = () => {
-//   currentTheme = currentTheme === "day" ? "night" : "day";
-
-//   document.querySelector("[data-settings-theme]").value = currentTheme;
-//   document.documentElement.style.setProperty(
-//     "--color-dark",
-//     currentTheme === "night" ? "10, 10, 20" : "255, 255, 255"
-//   );
-//   document.documentElement.style.setProperty(
-//     "--color-light",
-//     currentTheme === "night" ? "255, 255, 255" : "10, 10, 20"
-//   );
-// };
-
-// // Call themeSwitch() to toggle between night and day themes
-// themeSwitch();
-
-document.querySelector("[data-list-button]").innerText = `Show more (${
-  books.length - BOOKS_PER_PAGE
-})`;
-document.querySelector("[data-list-button]").disabled =
-  matches.length - page * BOOKS_PER_PAGE > 0;
-
-document.querySelector("[data-list-button]").innerHTML = `
+  listButton.innerHTML = `
     <span>Show more</span>
     <span class="list__remaining"> (${
       matches.length - page * BOOKS_PER_PAGE > 0
         ? matches.length - page * BOOKS_PER_PAGE
         : 0
     })</span>
-`;
+  `;
+}
 
-// document.querySelector("[data-search-cancel]").addEventListener("click", () => {
-//   document.querySelector("[data-search-overlay]").open = false;
-// });
-
-document
-  .querySelector("[data-settings-cancel]")
-  .addEventListener("click", () => {
-    document.querySelector("[data-settings-overlay]").open = false;
-  });
-
-// document.querySelector("[data-header-search]").addEventListener("click", () => {
-//   document.querySelector("[data-search-overlay]").open = true;
-//   document.querySelector("[data-search-title]").focus();
-// });
-
-document
-  .querySelector("[data-header-settings]")
-  .addEventListener("click", () => {
-    document.querySelector("[data-settings-overlay]").open = true;
-  });
-
-document.querySelector("[data-list-close]").addEventListener("click", () => {
-  document.querySelector("[data-list-active]").open = false;
-});
+showMoreButton(
+  books,
+  page,
+  matches,
+  BOOKS_PER_PAGE,
+  document.querySelector("[data-list-button]")
+);
 
 /**
  * Toggles the theme settings based on the selected theme.
@@ -204,6 +151,20 @@ function toggleThemeSettings(event) {
 
   document.querySelector("[data-settings-overlay]").open = false;
 }
+document
+  .querySelector("[data-settings-cancel]")
+  .addEventListener("click", () => {
+    document.querySelector("[data-settings-overlay]").open = false;
+  });
+document
+  .querySelector("[data-header-settings]")
+  .addEventListener("click", () => {
+    document.querySelector("[data-settings-overlay]").open = true;
+  });
+
+document.querySelector("[data-list-close]").addEventListener("click", () => {
+  document.querySelector("[data-list-active]").open = false;
+});
 
 /**
  * A function to set the theme colors for the document.
