@@ -47,3 +47,5 @@ The rationale behind the refactoring decisions made in the "Book Connect" projec
 2. The importance of grouping functions that perform certain things into one grouping for readability and also the hierarchy of function grouping within a codebase.
 
 3. How to refactor code into something more readable and less clunky.
+
+## Loom Video Link
