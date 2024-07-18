@@ -4,9 +4,9 @@
 
 This codebase consists of JavaScript functions and event handlers for a book preview and search functionality on a web page. It includes functions to render book previews, search for books based on filters, display book information, handle theme settings, and show more results.
 
-## functioality
+## Functionality
 
-The Javascript Functionality allows users to:
+The Javascript functionality allows users to:
 
 View book previews with author information.
 Search for books based on genres, authors, and titles.
@@ -34,16 +34,16 @@ The rationale behind the refactoring decisions made in the "Book Connect" projec
 
 - Any challenges faced during the refactoring process and how they were overcome.
 
-1. Refactoring code snippets by grouping them into a function withouut breaking the app
-   Overcame this by firstly understading the otiginal code snippet and rewriting smaller sections that can be refactored before encapsulating everything.
+1. Refactoring code snippets by grouping them into a function without breaking the app
+   Overcame this by firstly understanding the original code snippet and rewriting smaller sections that can be refactored before encapsulating everything.
 
 2. Figuring out which functions should be encapsulated.
-   Overcamee this by commeting out blocks of the codebase to figure out which functions handled what functionality.
+   Overcame this by commenting out blocks of the codebase to figure out which functions handled what functionality.
 
 - Reflections on how this exercise has deepened your understanding of JavaScript programming concepts.
 
-1. Training me to identify when code is being repetitive and how to take that repetitive code and encapsulate it into a fucntion that can just be called again without having to repeate the entire code.
+1. Training me to identify when code is being repetitive and how to take that repetitive code and encapsulate it into a function that can just be called again without having to repeat the entire code.
 
-2. The importantance of grouping functions that perform certain things into one grouping for readability and also the heirachy of function grouping within a codebase.
+2. The importance of grouping functions that perform certain things into one grouping for readability and also the hierarchy of function grouping within a codebase.
 
 3. How to refactor code into something more readable and less clunky.
