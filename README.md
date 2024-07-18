@@ -14,7 +14,7 @@ Display detailed information about selected books.
 Toggle between light and dark themes.
 For a detailed understanding of each function and its usage, refer to the code comments and function descriptions.
 
-#### Discussion and Reflection
+## Discussion and Reflection
 
 - The rationale behind the refactoring decisions made, including the choice of objects and functions.
 
