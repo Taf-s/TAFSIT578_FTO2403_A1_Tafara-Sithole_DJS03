@@ -49,3 +49,6 @@ The rationale behind the refactoring decisions made in the "Book Connect" projec
 3. How to refactor code into something more readable and less clunky.
 
 ## Loom Video Link
+
+https://www.loom.com/share/cdd74971989b4030a066462533dbd79a?sid=b0544238-a39e-43e7-960f-f674858401c4
+
